@@ -1,0 +1,25 @@
+{
+  "name": "opendata-task-backend",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "start": "node src/index.js",
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "lint": "eslint .",
+    "watch": "nodemon src/index.js"
+  },
+  "author": "Vilma Kangas",
+  "license": "ISC",
+  "dependencies": {
+    "axios": "^0.18.0",
+    "cors": "^2.8.5",
+    "dotenv": "^6.2.0",
+    "express": "^4.16.4",
+    "mongoose": "^5.4.17"
+  },
+  "devDependencies": {
+    "eslint": "^5.15.1",
+    "nodemon": "^1.18.10"
+  }
+}

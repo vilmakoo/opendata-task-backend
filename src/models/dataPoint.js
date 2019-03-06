@@ -10,7 +10,7 @@ mongoose.connect(dbUrl, { useNewUrlParser: true })
     console.log('error connecting to MongoDB:', error.message);
   });
 
-const eventSchema = new mongoose.Schema({
+const dataPointSchema = new mongoose.Schema({
   data: {
     date: Date,
     sensor1: Number,
@@ -20,7 +20,7 @@ const eventSchema = new mongoose.Schema({
   }
 });
 
-eventSchema.set('toJSON', {
+dataPointSchema.set('toJSON', {
   transform: (document, returnedObject) => {
     returnedObject.id = returnedObject._id;
     delete returnedObject._id;
@@ -28,4 +28,4 @@ eventSchema.set('toJSON', {
   }
 });
 
-module.exports = mongoose.model('Event', eventSchema);
+module.exports = mongoose.model('DataPoint', dataPointSchema);

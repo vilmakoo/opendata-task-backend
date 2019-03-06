@@ -1,22 +1,24 @@
-const Event = require('./models/event');
+const DataPoint = require('./models/dataPoint');
 
-const saveEvent = async (data) => {
-  const time = data.time;
+const saveDataPoint = async (data) => {
+  const time = new Date(data.date);
 
-  const events = await getEvents();
-  if (events.map(e => e.date).includes(time)) {
-    return 'event already saved';
+  const dataPoints = await getDataPoints();
+  const eventTimes = dataPoints.map(e => e.data.date).filter(t => t <= time);
+  if (eventTimes.length > 0) {
+    console.log('data point already saved');
+    return 'data point already saved';
   }
 
-  const event = new Event({ data: data });
-  await event.save();
-  console.log('event saved:', data);
-  return event;
+  const dataPoint = new DataPoint({ data: data });
+  await dataPoint.save();
+  console.log('data point saved:', data);
+  return dataPoint;
 };
 
-const getEvents = async () => {
-  const events = await Event.find({});
-  return events;
+const getDataPoints = async () => {
+  const dataPoints = await DataPoint.find({});
+  return dataPoints;
 };
 
-module.exports = { saveEvent, getEvents };
+module.exports = { saveDataPoint, getDataPoints };

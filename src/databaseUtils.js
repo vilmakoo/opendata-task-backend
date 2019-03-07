@@ -4,7 +4,7 @@ const saveDataPoint = async (data) => {
   const time = new Date(data.date);
 
   const dataPoints = await getDataPoints();
-  const eventTimes = dataPoints.map(e => e.data.date).filter(t => t <= time);
+  const eventTimes = dataPoints.map(e => e.data.date).filter(d => d.getTime() === time.getTime());
   if (eventTimes.length > 0) {
     console.log('data point already saved');
     return 'data point already saved';

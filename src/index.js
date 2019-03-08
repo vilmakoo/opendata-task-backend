@@ -1,8 +1,17 @@
 require('dotenv').config();
 const express = require('express');
 var cors = require('cors');
+var CronJob = require('cron').CronJob;
 const databaseUtils = require('./databaseUtils');
 const dataService = require('./dataService');
+
+const job = new CronJob('0 1 * * * *', async () => {
+  const d = new Date();
+  const dataPoint = await dataService.fetchData();
+  console.log('new data fetched at:', d);
+});
+console.log('After job instantiation');
+job.start();
 
 const app = express();
 app.use(express.static('build'));
